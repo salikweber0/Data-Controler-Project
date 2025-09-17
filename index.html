@@ -18,19 +18,97 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 10px;
         }
 
         .container {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             border-radius: 20px;
-            padding: 40px;
+            padding: 30px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 420px;
             position: relative;
             overflow: hidden;
+        }
+
+        /* Mobile First - Extra Small devices (phones, 600px and down) */
+        @media only screen and (max-width: 600px) {
+            body {
+                padding: 5px;
+            }
+            
+            .container {
+                padding: 20px 15px;
+                border-radius: 15px;
+                max-width: 95%;
+                margin: 5px;
+            }
+            
+            h2 {
+                font-size: 22px !important;
+                margin-bottom: 20px !important;
+            }
+            
+            input {
+                padding: 12px !important;
+                font-size: 14px !important;
+            }
+            
+            .btn {
+                padding: 12px !important;
+                font-size: 14px !important;
+            }
+            
+            .form-group {
+                margin-bottom: 15px !important;
+            }
+            
+            label {
+                font-size: 14px;
+            }
+            
+            .admin-info {
+                padding: 10px !important;
+                font-size: 12px !important;
+            }
+        }
+
+        /* Small devices (portrait tablets and large phones, 600px and up) */
+        @media only screen and (min-width: 600px) {
+            .container {
+                padding: 35px;
+                max-width: 450px;
+            }
+        }
+
+        /* Medium devices (landscape tablets, 768px and up) */
+        @media only screen and (min-width: 768px) {
+            body {
+                padding: 20px;
+            }
+            
+            .container {
+                padding: 40px;
+                max-width: 480px;
+            }
+        }
+
+        /* Large devices (laptops/desktops, 992px and up) */
+        @media only screen and (min-width: 992px) {
+            .container {
+                max-width: 500px;
+                padding: 45px;
+            }
+        }
+
+        /* Extra large devices (large laptops and desktops, 1200px and up) */
+        @media only screen and (min-width: 1200px) {
+            .container {
+                max-width: 520px;
+                padding: 50px;
+            }
         }
 
         .form-section {
@@ -51,8 +129,9 @@
             text-align: center;
             margin-bottom: 30px;
             color: #333;
-            font-size: 28px;
+            font-size: clamp(20px, 5vw, 28px);
             font-weight: 600;
+            line-height: 1.2;
         }
 
         .form-group {
@@ -64,6 +143,7 @@
             margin-bottom: 8px;
             color: #555;
             font-weight: 500;
+            font-size: clamp(14px, 2.5vw, 16px);
         }
 
         input {
@@ -71,9 +151,11 @@
             padding: 15px;
             border: 2px solid #e1e5e9;
             border-radius: 10px;
-            font-size: 16px;
+            font-size: clamp(14px, 2.5vw, 16px);
             transition: all 0.3s ease;
             background: rgba(255, 255, 255, 0.9);
+            -webkit-appearance: none;
+            appearance: none;
         }
 
         input:focus {
@@ -83,17 +165,28 @@
             box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
         }
 
+        /* Better touch targets for mobile */
+        @media (hover: none) and (pointer: coarse) {
+            input {
+                min-height: 44px;
+            }
+        }
+
         .btn {
             width: 100%;
             padding: 15px;
             border: none;
             border-radius: 10px;
-            font-size: 16px;
+            font-size: clamp(14px, 2.5vw, 16px);
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .btn-primary {
@@ -119,38 +212,162 @@
             transform: translateY(-2px);
         }
 
+        /* Disable hover effects on touch devices */
+        @media (hover: none) {
+            .btn-primary:hover {
+                transform: none;
+                box-shadow: none;
+            }
+            
+            .btn-secondary:hover {
+                transform: none;
+            }
+            
+            input:focus {
+                transform: none;
+            }
+        }
+
         .link-btn {
             background: none;
             border: none;
             color: #667eea;
             cursor: pointer;
             text-decoration: underline;
-            font-size: 14px;
+            font-size: clamp(12px, 2vw, 14px);
             margin-top: 10px;
             display: block;
             text-align: center;
+            padding: 10px;
+            min-height: 44px;
+            line-height: 1.4;
         }
 
         .link-btn:hover {
             color: #764ba2;
         }
 
-        .success-message {
-            background: #d4edda;
-            color: #155724;
+        .success-message, .error-message {
             padding: 15px;
             border-radius: 10px;
             margin-bottom: 20px;
             display: none;
+            font-size: clamp(12px, 2vw, 14px);
+            line-height: 1.4;
+            word-wrap: break-word;
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
         }
 
         .error-message {
             background: #f8d7da;
             color: #721c24;
+        }
+
+        .admin-info {
+            background: #e3f2fd;
             padding: 15px;
             border-radius: 10px;
             margin-bottom: 20px;
-            display: none;
+            font-size: clamp(12px, 2vw, 14px);
+            color: #1565c0;
+            line-height: 1.4;
+            word-wrap: break-word;
+        }
+
+        /* Landscape phone orientation */
+        @media only screen and (max-height: 500px) and (orientation: landscape) {
+            body {
+                align-items: flex-start;
+                padding: 10px;
+            }
+            
+            .container {
+                margin: 10px 0;
+                padding: 20px;
+            }
+            
+            h2 {
+                margin-bottom: 15px;
+                font-size: 20px;
+            }
+            
+            .form-group {
+                margin-bottom: 10px;
+            }
+            
+            input, .btn {
+                padding: 10px;
+            }
+        }
+
+        /* High DPI displays */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .container {
+                backdrop-filter: blur(15px);
+            }
+        }
+
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            .container {
+                background: rgba(30, 30, 30, 0.95);
+            }
+            
+            h2 {
+                color: #fff;
+            }
+            
+            label {
+                color: #ccc;
+            }
+            
+            input {
+                background: rgba(60, 60, 60, 0.9);
+                color: #fff;
+                border-color: #444;
+            }
+            
+            input:focus {
+                border-color: #667eea;
+            }
+        }
+
+        /* Reduce motion for accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            
+            .btn:hover, .btn-secondary:hover {
+                transform: none;
+            }
+            
+            input:focus {
+                transform: none;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                background: white;
+            }
+            
+            .container {
+                background: white;
+                box-shadow: none;
+                border: 1px solid #000;
+            }
+            
+            .btn {
+                display: none;
+            }
         }
     </style>
 </head>
@@ -165,19 +382,19 @@
             <form id="signin-form">
                 <div class="form-group">
                     <label for="fullname">Full Name</label>
-                    <input type="text" id="fullname" name="fullname" required>
+                    <input type="text" id="fullname" name="fullname" required autocomplete="name">
                 </div>
                 <div class="form-group">
                     <label for="phone">Phone Number</label>
-                    <input type="tel" id="phone" name="phone" required>
+                    <input type="tel" id="phone" name="phone" required autocomplete="tel">
                 </div>
                 <div class="form-group">
                     <label for="signin-email">Email</label>
-                    <input type="email" id="signin-email" name="email" required>
+                    <input type="email" id="signin-email" name="email" required autocomplete="email">
                 </div>
                 <div class="form-group">
                     <label for="signin-password">Password</label>
-                    <input type="password" id="signin-password" name="password" required>
+                    <input type="password" id="signin-password" name="password" required autocomplete="new-password">
                 </div>
                 <button type="submit" class="btn btn-primary">Sign Up</button>
             </form>
@@ -187,19 +404,19 @@
         <!-- Login Section -->
         <div id="login-section" class="form-section">
             <h2>Login</h2>
-            <div style="background: #e3f2fd; padding: 15px; border-radius: 10px; margin-bottom: 20px; font-size: 14px; color: #1565c0;">
+            <div class="admin-info">
                 <strong>Admin Access:</strong><br>
-                Email:- admin@gmail.com<br>
-                password:- admin@123
+                Email: admin@gmail.com<br>
+                Password: admin@123
             </div>
             <form id="login-form">
                 <div class="form-group">
                     <label for="login-email">Email</label>
-                    <input type="email" id="login-email" name="email" required>
+                    <input type="email" id="login-email" name="email" required autocomplete="email">
                 </div>
                 <div class="form-group">
                     <label for="login-password">Password</label>
-                    <input type="password" id="login-password" name="password" required>
+                    <input type="password" id="login-password" name="password" required autocomplete="current-password">
                 </div>
                 <button type="submit" class="btn btn-primary">Login</button>
             </form>
@@ -213,11 +430,11 @@
             <form id="forgot-form">
                 <div class="form-group">
                     <label for="forgot-phone">Phone Number</label>
-                    <input type="tel" id="forgot-phone" name="phone" required>
+                    <input type="tel" id="forgot-phone" name="phone" required autocomplete="tel">
                 </div>
                 <div class="form-group">
                     <label for="new-password">New Password</label>
-                    <input type="password" id="new-password" name="newPassword" required>
+                    <input type="password" id="new-password" name="newPassword" required autocomplete="new-password">
                 </div>
                 <button type="submit" class="btn btn-primary">Reset Password</button>
             </form>
@@ -363,6 +580,18 @@
             this.reset();
             setTimeout(() => showLogin(), 2000);
         });
+
+        // Keyboard navigation enhancement
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                hideMessages();
+            }
+        });
+
+        // Touch device optimization
+        if ('ontouchstart' in window) {
+            document.body.classList.add('touch-device');
+        }
     </script>
 </body>
 </html>
