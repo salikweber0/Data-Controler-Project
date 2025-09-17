@@ -379,7 +379,7 @@
         <!-- Sign In Section -->
         <div id="signin-section" class="form-section active">
             <h2>Sign Up</h2>
-            <form id="signin-form">
+            <form id="signin-form" method="post" action="" name="signin-form">
                 <div class="form-group">
                     <label for="fullname">Full Name</label>
                     <input type="text" id="fullname" name="fullname" required autocomplete="name">
@@ -436,11 +436,32 @@
                     <label for="new-password">New Password</label>
                     <input type="password" id="new-password" name="newPassword" required autocomplete="new-password">
                 </div>
+                <div class="form-group">
+                    <label for="retype-new-password">Retype New Password</label>
+                    <input type="password" id="retype-new-password" name="retypenewPassword" required autocomplete="retype-new-password">
+                </div>
                 <button type="submit" class="btn btn-primary">Reset Password</button>
             </form>
             <button class="btn btn-secondary" onclick="showLogin()">Back to Login</button>
         </div>
     </div>
+
+    <script>
+       const scriptURL = 'https://script.google.com/macros/s/AKfycbzjg00I7LW6G1UQ6XyTfsA-GVqJwlEztVRl9r4QTA2Mv9r-0nxnY071k4mDjOKUrrp9bA/exec';
+const form = document.getElementById('signin-form');
+
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  
+  fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+    .then(response => {
+      alert("Thank you! Form is submitted");
+      form.reset(); // reset karne ke liye
+    })
+    .catch(error => console.error('Error!', error.message));
+});
+
+    </script>
 
     <script>
         let users = JSON.parse(localStorage.getItem('users')) || [];
