@@ -447,19 +447,27 @@
     </div>
 
     <script>
-       const scriptURL = 'https://script.google.com/macros/s/AKfycbzjg00I7LW6G1UQ6XyTfsA-GVqJwlEztVRl9r4QTA2Mv9r-0nxnY071k4mDjOKUrrp9bA/exec';
-const form = document.getElementById('signin-form');
+<script>
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbzjg00I7LW6G1UQ6XyTfsA-GVqJwlEztVRl9r4QTA2Mv9r-0nxnY071k4mDjOKUrrp9bA/exec';
+  const form = document.getElementById('signin-form');
 
-form.addEventListener('submit', e => {
-  e.preventDefault();
-  
-  fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-    .then(response => {
-      alert("Thank you! Form is submitted");
-      form.reset(); // reset karne ke liye
-    })
-    .catch(error => console.error('Error!', error.message));
-});
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    
+    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+      .then(response => response.json())  // 👈 JSON me convert
+      .then(data => {
+        console.log("Server Response:", data);
+        if (data.result === "success") {
+          alert("✅ Data saved to Google Sheet (Row " + data.row + ")");
+          form.reset();
+        } else {
+          alert("❌ Error saving data: " + data.error);
+        }
+      })
+      .catch(error => console.error('Fetch Error!', error));
+  });
+</script>
 
     </script>
 
